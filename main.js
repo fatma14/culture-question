@@ -1,5 +1,5 @@
-const roulette = new Roulette();
 let myFont;
+const roulette = new Roulette();
 
 let started = false;
 function preload() {
@@ -7,7 +7,6 @@ function preload() {
 }
 
 function setup() {
-  // frameRate(1);
   createCanvas(800, 800, WEBGL);
   ellipseMode(CENTER);
   textFont(myFont);
@@ -28,7 +27,13 @@ document.getElementById("spinnbutton").addEventListener("click", start);
 
 function start() {
   started = true;
+
   setTimeout(function() {
     started = false;
   }, 4000);
+
+  setTimeout(function() {
+    question.getQuestion();
+  }, 4500);
 }
+const question = new Question("Geo");

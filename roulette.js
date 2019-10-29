@@ -1,10 +1,9 @@
-const categories = ["Sci", "History", "Art", "Geo"];
+const categories = ["Sci", "Hist", "Art", "Geo"];
 const colors = ["#edca5a", "#efd06c", "#f2da8c", "#f6e5ac"];
 
 class Roulette {
   constructor() {
     this.rotatedAngle = 0;
-    this.rotationSpeed = 30;
   }
 
   draw() {
@@ -15,22 +14,41 @@ class Roulette {
       fill("#000000");
       text(
         category,
-        Math.sign(sin(radians(index * 90 + 45))) * 100,
-        Math.sign(cos(radians(index * 90 + 45))) * 100
+        Math.sign(cos(radians(index * 90 + 45))) * 100,
+        Math.sign(sin(radians(index * 90 + 45))) * 100
       );
     });
   }
 
   spin() {
-    const angle = millis() / 1000;
     angleMode(DEGREES);
-    //console.log(this.rotatedAngle + this.rotationSpeed);
-    // rotateZ(this.rotatedAngle + this.rotationSpeed);
-    rotateZ(this.rotatedAngle + angle);
-    // this.rotatedAngle += this.rotationSpeed;
-    this.rotatedAngle += angle;
+    const rotationSpeed = 10;
+    const rotationAngle = this.rotatedAngle % 360;
+    rotateZ(this.rotatedAngle + rotationSpeed);
+    this.rotatedAngle += rotationSpeed;
     console.log(this.rotatedAngle);
+    if (rotationAngle > 0 && rotationAngle < 90) {
+      console.log("art");
+    } else if (rotationAngle > 90 && rotationAngle < 180) {
+      console.log("geo");
+    } else if (rotationAngle > 180 && rotationAngle < 270) {
+      console.log("sci");
+    } else {
+      console.log("his");
+    }
     angleMode(RADIANS);
     this.draw();
   }
+
+  // getTheChosenCategory() {
+  //   const rotationAngle = this.rotatedAngle % 360;
+  //   if (rotationAngle > 0 && rotationAngle < 90) {
+  //     console.log("science");
+  //   } //else if ()
+  //   //   sci [0-90]
+  //   //   his [90-180]
+  //   //   art [180-270]
+  //   //   geo[270-360]
+  //   // }
+  // }
 }
