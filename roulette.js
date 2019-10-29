@@ -23,32 +23,23 @@ class Roulette {
   spin() {
     angleMode(DEGREES);
     const rotationSpeed = 10;
-    const rotationAngle = this.rotatedAngle % 360;
     rotateZ(this.rotatedAngle + rotationSpeed);
     this.rotatedAngle += rotationSpeed;
-    console.log(this.rotatedAngle);
-    if (rotationAngle > 0 && rotationAngle < 90) {
-      console.log("art");
-    } else if (rotationAngle > 90 && rotationAngle < 180) {
-      console.log("geo");
-    } else if (rotationAngle > 180 && rotationAngle < 270) {
-      console.log("sci");
-    } else {
-      console.log("his");
-    }
+
     angleMode(RADIANS);
     this.draw();
   }
 
-  // getTheChosenCategory() {
-  //   const rotationAngle = this.rotatedAngle % 360;
-  //   if (rotationAngle > 0 && rotationAngle < 90) {
-  //     console.log("science");
-  //   } //else if ()
-  //   //   sci [0-90]
-  //   //   his [90-180]
-  //   //   art [180-270]
-  //   //   geo[270-360]
-  //   // }
-  // }
+  getTheChosenCategory() {
+    const rotationAngle = this.rotatedAngle % 360;
+    if (rotationAngle > 0 && rotationAngle <= 90) {
+      return "art";
+    } else if (rotationAngle > 90 && rotationAngle <= 180) {
+      return "his";
+    } else if (rotationAngle > 180 && rotationAngle < 270) {
+      return "sci";
+    } else {
+      return "geo";
+    }
+  }
 }

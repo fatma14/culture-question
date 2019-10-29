@@ -33,7 +33,7 @@ function start() {
   }, 4000);
 
   setTimeout(function() {
+    const question = new Question(roulette.getTheChosenCategory());
     question.getQuestion();
   }, 4500);
 }
-const question = new Question("Geo");

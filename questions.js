@@ -42,43 +42,32 @@ class Question {
   constructor(category) {
     this.category = category;
     this.chosenQuestion;
-    this.rightAnswer;
-    this.theChoices = [];
   }
 
   getQuestion() {
     if (this.category === "Sci") {
       let index = Math.floor(Math.random() * scienceQA.length);
-      this.chosenQuestion = scienceQA[index].text;
-      this.rightAnswer = scienceQA[index].answer;
-      this.theChoices = scienceQA[index].choices;
-      console.log(this.chosenQuestion);
+      this.chosenQuestion = scienceQA[index];
     } else if (this.category === "Hist") {
       let index = Math.floor(Math.random() * historyQA.length);
-      this.chosenQuestion = historyQA[index].text;
-      this.rightAnswer = historyQA[index].answer;
-      this.theChoices = historyQA[index].choices;
-      console.log(this.chosenQuestion);
+      this.chosenQuestion = historyQA[index];
     } else if (this.category === "Geo") {
       let index = Math.floor(Math.random() * geoQA.length);
-      this.chosenQuestion = geoQA[index].text;
-      this.rightAnswer = geoQA[index].answer;
-      this.theChoices = geoQA[index].choices;
+      this.chosenQuestion = geoQA[index];
     } else {
       let index = Math.floor(Math.random() * artQA.length);
-      this.chosenQuestion = artQA[index].text;
-      this.rightAnswer = artQA[index].answer;
-      this.theChoices = artQA[index].choices;
+      this.chosenQuestion = artQA[index];
     }
     this.showQuestion();
     this.showChoices();
   }
 
   showQuestion() {
-    createDiv(this.chosenQuestion);
+    createDiv(this.chosenQuestion.text);
   }
+
   showChoices() {
-    let firstChoice = createButton(this.theChoices[0]);
-    let secondeChoice = createButton(this.theChoices[1]);
+    createButton(this.chosenQuestion.choices[0]);
+    createButton(this.chosenQuestion.choices[1]);
   }
 }
