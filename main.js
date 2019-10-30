@@ -1,7 +1,7 @@
 let myFont;
 const roulette = new Roulette();
+const game = new Game();
 
-let started = false;
 function preload() {
   myFont = loadFont("asset/Remachine.ttf");
 }
@@ -11,29 +11,15 @@ function setup() {
   ellipseMode(CENTER);
   textFont(myFont);
   textSize(35);
-  fill("#f56c42");
-  noStroke();
-  triangle(-50, -250, 0, -200, 50, -250);
-  roulette.draw();
+  game.setup();
 }
 
 function draw() {
-  if (started) {
-    roulette.spin();
-  }
+  game.draw();
 }
 
-document.getElementById("spinnbutton").addEventListener("click", start);
-
-function start() {
-  started = true;
-
-  setTimeout(function() {
-    started = false;
-  }, 4000);
-
-  setTimeout(function() {
-    const question = new Question(roulette.getTheChosenCategory());
-    question.getQuestion();
-  }, 4500);
-}
+//   setTimeout(function() {
+//     const question = new Question(roulette.getTheChosenCategory());
+//     question.getQuestion();
+//   }, 4500);
+// }

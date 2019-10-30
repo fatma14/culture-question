@@ -58,16 +58,16 @@ class Question {
       let index = Math.floor(Math.random() * artQA.length);
       this.chosenQuestion = artQA[index];
     }
-    this.showQuestion();
-    this.showChoices();
   }
 
-  showQuestion() {
-    createDiv(this.chosenQuestion.text);
-  }
+  draw() {
+    const questionDiv = createDiv().class("question");
+    const questionText = createDiv(this.chosenQuestion.text);
+    const questionOption1 = createButton(this.chosenQuestion.choices[0]);
+    const questionOption2 = createButton(this.chosenQuestion.choices[1]);
 
-  showChoices() {
-    createButton(this.chosenQuestion.choices[0]);
-    createButton(this.chosenQuestion.choices[1]);
+    questionDiv.child(questionText);
+    questionDiv.child(questionOption1);
+    questionDiv.child(questionOption2);
   }
 }
