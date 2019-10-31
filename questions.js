@@ -63,13 +63,13 @@ class Question {
   }
 
   draw() {
-    this.questionDiv = createDiv().class("question");
+    this.questionDiv = createDiv().class("question container");
     const questionText = createDiv(this.chosenQuestion.text).class(
       "questionText"
     );
     this.questionDiv.child(questionText);
     this.chosenQuestion.choices.forEach(choice => {
-      const button = createButton(choice);
+      const button = createButton(choice).class("btn btn-warning btn-lg");
       button.mouseClicked(() => {
         button.class(
           choice === this.chosenQuestion.answer ? "correct" : "wrong"
