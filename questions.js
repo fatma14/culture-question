@@ -1,47 +1,49 @@
 const scienceQA = [
-  { text: "Q1S", answer: "A1", choices: ["c11", "c12"] },
+  { text: "Q1S", answer: "c11", choices: ["c11", "c12"] },
 
-  { text: "Q2", answer: "A2", choices: ["c21", "c22"] },
+  { text: "Q2", answer: "c21", choices: ["c21", "c22"] },
 
-  { text: "Q3", answer: "A3", choices: ["c31", "c32"] },
+  { text: "Q3", answer: "c31", choices: ["c31", "c32"] },
 
-  { text: "Q4", answer: "A4", choices: ["c41", "c42"] }
+  { text: "Q4", answer: "c41", choices: ["c41", "c42"] }
 ];
 
 const geoQA = [
-  { text: "Q1g", answer: "A1", choices: ["c11g", "c12"] },
+  { text: "Q1g", answer: "c11", choices: ["c11", "c12"] },
 
-  { text: "Q2g", answer: "A2", choices: ["c21g", "c21"] },
+  { text: "Q2g", answer: "c21", choices: ["c21", "c21"] },
 
-  { text: "Q3g", answer: "A3", choices: ["c31g", "c32"] },
+  { text: "Q3g", answer: "c31", choices: ["c31", "c32"] },
 
-  { text: "Q4g", answer: "A4", choices: ["c41g", "c42"] }
+  { text: "Q4g", answer: "c41", choices: ["c41", "c42"] }
 ];
 
 const artQA = [
-  { text: "Q1", answer: "A1", choices: ["c11", "c12"] },
+  { text: "Q1", answer: "c11", choices: ["c11", "c12"] },
 
-  { text: "Q2", answer: "A2", choices: ["c2", "c21"] },
+  { text: "Q2", answer: "c21", choices: ["c2", "c21"] },
 
-  { text: "Q3", answer: "A3", choices: ["c31", "c32"] },
+  { text: "Q3", answer: "c31", choices: ["c31", "c32"] },
 
-  { text: "Q4", answer: "A4", choices: ["c41", "c42"] }
+  { text: "Q4", answer: "c41", choices: ["c41", "c42"] }
 ];
 
 const historyQA = [
-  { text: "Q1", answer: "A1", choices: ["c11", "c12"] },
+  { text: "Q1", answer: "c11", choices: ["c11", "c12"] },
 
-  { text: "Q2", answer: "A2", choices: ["c2", "c21"] },
+  { text: "Q2", answer: "c21", choices: ["c2", "c21"] },
 
-  { text: "Q3", answer: "A3", choices: ["c31", "c32"] },
+  { text: "Q3", answer: "c31", choices: ["c31", "c32"] },
 
-  { text: "Q4", answer: "A4", choices: ["c41", "c42"] }
+  { text: "Q4", answer: "c41", choices: ["c41", "c42"] }
 ];
 
 class Question {
-  constructor(category) {
+  constructor(category, onQuestionAnswered) {
+    this.onQuestionAnswered = onQuestionAnswered;
     this.category = category;
     this.chosenQuestion;
+    this.questionDiv;
   }
 
   getQuestion() {
@@ -61,13 +63,26 @@ class Question {
   }
 
   draw() {
-    const questionDiv = createDiv().class("question");
-    const questionText = createDiv(this.chosenQuestion.text);
-    const questionOption1 = createButton(this.chosenQuestion.choices[0]);
-    const questionOption2 = createButton(this.chosenQuestion.choices[1]);
+    this.questionDiv = createDiv().class("question");
+    const questionText = createDiv(this.chosenQuestion.text).class(
+      "questionText"
+    );
+    this.questionDiv.child(questionText);
+    this.chosenQuestion.choices.forEach(choice => {
+      const button = createButton(choice);
+      button.mouseClicked(() => {
+        button.class(
+          choice === this.chosenQuestion.answer ? "correct" : "wrong"
+        );
+        setTimeout(() => {
+          this.onQuestionAnswered(choice === this.chosenQuestion.answer);
+        }, 1000);
+      });
+      this.questionDiv.child(button);
+    });
+  }
 
-    questionDiv.child(questionText);
-    questionDiv.child(questionOption1);
-    questionDiv.child(questionOption2);
+  remove() {
+    this.questionDiv.remove();
   }
 }

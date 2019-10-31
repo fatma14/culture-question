@@ -14,13 +14,59 @@
     />
   </head>
   <body>
-    <button type="button" class="btn btn-info btn-lg" id="spinnbutton">
-      START
-    </button>
+      <div class="container-fluid  ">
+        <div class="row d-flex justify-content-between">
+        <div class="col-sm-3 mt-5 mb-5 text-white bg-info border border-warning">
+            <p class="card-text">Hello there!! </br>
+              This game is based on your general culture, it consists of two players so to win it you have to score more then your opponent!! 
+            </p>
+        </div>
 
+        <div class="col-sm-3 mt-5">
+            <img src="asset/reading-school-cliparts-164182-3852889.png" class="img-fluid">
+          </div>
+
+        <div id="instructions" class="col-sm-6 mt-5 mb-5 text-white bg-warning border border-info">
+          <p>How does the game work??</p>
+          <ul>
+            <li>On your turn click on the start button to spin the wheel</li>
+            <li>Once the wheel has stopped in a specific category, a question will pop up with two choices</li>
+            <li>Choose the answer by clicking on the choice button </li>
+            <li>If you guessed the right answer your score will be increased by five points</li>
+            <li>Time for your opponent to play !! </li>
+          </ul>
+        </div>
+        
+      </div>
+      
+             <div class="col-sm-3 mt-5">
+                <button id="startPageNextButton" class="btn btn-success btn-lg" style="font-family: myFirstFont; font-size: 50px;">NEXT</button> 
+             </div>
+
+        
+      </div>
+        
+
+    <div id="nextPage" style="display: none;">
+        <div class="d-flex justify-content-center bg-warning ">
+            <h1 class="text-center shadow-lg p-3 mb-5 bg-white rounded w-50">
+              SPIN IT TILL YOU WIN IT
+            </h1>
+          </div>
+      
+          <div class="container col-auto mr-auto">
+            <button type="button" class="btn btn-info btn-lg" id="spinnbutton">
+              START
+            </button>
+          </div>
+      
+    </div>
+    
     <script src="library/p5.js"></script>
+    <script src="background.js"></script>
     <script src="roulette.js"></script>
     <script src="questions.js"></script>
+    <script src="player.js"></script>
     <script src="game.js"></script>
     <script src="main.js"></script>
   </body>

@@ -23,9 +23,9 @@ class Roulette {
   spin() {
     angleMode(DEGREES);
     const rotationSpeed = 10;
-    rotateZ(this.rotatedAngle + rotationSpeed);
     this.rotatedAngle += rotationSpeed;
-
+    rotateZ(this.rotatedAngle);
+    console.warn("spin", this.rotatedAngle);
     angleMode(RADIANS);
     this.draw();
   }
@@ -41,5 +41,14 @@ class Roulette {
     } else {
       return "geo";
     }
+  }
+
+  reinitialise() {
+    console.warn("reinitialise", this.rotatedAngle);
+    angleMode(DEGREES);
+    rotateZ(-this.rotatedAngle);
+    //this.rotatedAngle = 0;
+    angleMode(RADIANS);
+    this.draw();
   }
 }
