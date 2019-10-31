@@ -2,10 +2,6 @@ class Game {
   constructor() {
     this.roulette = new Roulette();
     this.screen = "";
-    this.player1 = new Player();
-    this.player2 = new Player();
-    this.turn = Math.floor(Math.random() + 1);
-    this.turnNumber = 0;
   }
 
   setup() {
@@ -18,7 +14,35 @@ class Game {
         document.getElementById("startPage").style.display = "none";
         this.screen = "fixedWheel";
         document.getElementById("nextPage").style.display = "block";
+        document.getElementById("playersInput").style.display = "block";
       });
+
+    document.getElementById("startGame").addEventListener("click", () => {
+      const player1NameField = document.getElementById("player1-name");
+      const player2NameField = document.getElementById("player2-name");
+
+      player1NameField.addEventListener("input", () => {
+        player1NameField.classList.remove("is-invalid");
+      });
+      player2NameField.addEventListener("change", () => {
+        player2NameField.classList.remove("is-invalid");
+      });
+
+      const player1Name = player1NameField.value;
+      const player2Name = player2NameField.value;
+      if (player1Name !== "" && player2Name !== "") {
+        document.getElementById("playersInput").style.display = "none";
+        document.getElementById("wheelContainer").style.display = "block";
+        this.startGame(player1Name, player2Name);
+      } else {
+        if (player1Name === "") {
+          player1NameField.classList.add("is-invalid");
+        }
+        if (player2Name === "") {
+          player2NameField.classList.add("is-invalid");
+        }
+      }
+    });
   }
 
   draw() {
@@ -32,13 +56,33 @@ class Game {
     }
   }
 
-  getPlayerTurn() {
+  startGame(player1Name, player2Name) {
+    this.player1 = new Player(player1Name);
+    this.player2 = new Player(player2Name);
+    this.turnNumber = 0;
+    this.turn = Math.floor(Math.random() + 1);
+    this.setTurn();
+    this.updateScoreDisplay();
+  }
+
+  setTurn() {
     this.turnNumber += 1;
     if (this.turn === 1) {
+      document.getElementById("player-turn-name").innerHTML = this.player1.name;
       return this.player1;
     } else if (this.turn === 2) {
+      document.getElementById("player-turn-name").innerHTML = this.player2.name;
       return this.player2;
     }
+  }
+
+  updateScoreDisplay() {
+    document.getElementById(
+      "player1-name-score"
+    ).innerHTML = `${this.player1.name}: ${this.player1.score}`;
+    document.getElementById(
+      "player2-name-score"
+    ).innerHTML = `${this.player2.name}: ${this.player2.score}`;
   }
 
   endPlayerTurn() {
@@ -50,9 +94,10 @@ class Game {
   }
 
   onQuestionAnswered(isCorrect) {
-    const chosenPlayer = this.getPlayerTurn();
+    const chosenPlayer = this.setTurn();
     if (isCorrect) {
       chosenPlayer.score += 5;
+      this.updateScoreDisplay();
     }
     this.endPlayerTurn();
     this.question.remove();

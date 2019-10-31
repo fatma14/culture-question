@@ -7,7 +7,8 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(800, 800, WEBGL);
+  const canvas = createCanvas(600, 600, WEBGL);
+  canvas.parent("canvas-container");
   ellipseMode(CENTER);
   textFont(myFont);
   textSize(35);

@@ -69,16 +69,22 @@ class Question {
     );
     this.questionDiv.child(questionText);
     this.chosenQuestion.choices.forEach(choice => {
-      const button = createButton(choice).class("btn btn-warning btn-lg");
+      const defaultClasses = "btn btn-lg";
+      const button = createButton(choice).class(
+        `${defaultClasses} btn-warning`
+      );
       button.mouseClicked(() => {
         button.class(
-          choice === this.chosenQuestion.answer ? "correct" : "wrong"
+          choice === this.chosenQuestion.answer
+            ? `${defaultClasses} btn-success`
+            : `${defaultClasses} btn-danger`
         );
         setTimeout(() => {
           this.onQuestionAnswered(choice === this.chosenQuestion.answer);
         }, 1000);
       });
       this.questionDiv.child(button);
+      this.questionDiv.parent("canvas-container");
     });
   }
 

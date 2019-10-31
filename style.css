@@ -34,7 +34,11 @@ li {
   line-height: 1.5;
   border-radius: 0.3rem;
 }
-
-input {
-  border: red;
+.text-center {
+  font-family: myFirstFont;
+  font-size: 80px;
+  color: white;
+}
+#canvas-container {
+  display: flex;
 }
