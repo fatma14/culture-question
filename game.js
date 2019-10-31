@@ -124,6 +124,6 @@ class Game {
   }
 
   isGameFinished() {
-    return this.turnNumber === 4;
+    return this.turnNumber === 10;
   }
 }
