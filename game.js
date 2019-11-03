@@ -61,19 +61,21 @@ class Game {
     this.player2 = new Player(player2Name);
     this.turnNumber = 0;
     this.turn = Math.floor(Math.random() + 1);
-    this.setTurn();
+    this.getPlayerTurn();
     this.updateScoreDisplay();
+    this.displayPlayerTurn();
   }
 
-  setTurn() {
-    this.turnNumber += 1;
+  getPlayerTurn() {
     if (this.turn === 1) {
-      document.getElementById("player-turn-name").innerHTML = this.player1.name;
       return this.player1;
     } else if (this.turn === 2) {
-      document.getElementById("player-turn-name").innerHTML = this.player2.name;
       return this.player2;
     }
+  }
+
+  incrementTurn() {
+    this.turnNumber += 1;
   }
 
   updateScoreDisplay() {
@@ -85,16 +87,27 @@ class Game {
     ).innerHTML = `${this.player2.name}: ${this.player2.score}`;
   }
 
+  displayPlayerTurn() {
+    if (this.turn === 1) {
+      document.getElementById("player-turn-name").innerHTML = this.player1.name;
+    } else if (this.turn === 2) {
+      document.getElementById("player-turn-name").innerHTML = this.player2.name;
+    }
+  }
+
   endPlayerTurn() {
+    console.warn("endPlayerTurn", this.turn);
     if (this.turn === 1) {
       this.turn = 2;
     } else if (this.turn === 2) {
       this.turn = 1;
     }
+    this.displayPlayerTurn();
   }
 
   onQuestionAnswered(isCorrect) {
-    const chosenPlayer = this.setTurn();
+    this.incrementTurn();
+    const chosenPlayer = this.getPlayerTurn();
     if (isCorrect) {
       chosenPlayer.score += 5;
       this.updateScoreDisplay();

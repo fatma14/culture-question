@@ -25,7 +25,6 @@ class Roulette {
     const rotationSpeed = 10;
     this.rotatedAngle += rotationSpeed;
     rotateZ(this.rotatedAngle);
-    console.warn("spin", this.rotatedAngle);
     angleMode(RADIANS);
     this.draw();
   }
