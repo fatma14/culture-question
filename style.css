@@ -51,3 +51,11 @@ li {
 h2 {
   font-family: myFirstFont;
 }
+
+#winner-page {
+  display: flex;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 60px;
+  justify-content: center;
+  margin-top: 80px;
+}
