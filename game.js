@@ -119,7 +119,9 @@ class Game {
       noCanvas();
       const winner =
         this.player1.score > this.player2.score ? this.player1 : this.player2;
-      createDiv(`The winner is ${winner.name}`);
+      document.getElementById("wheelContainer").style.display = "none";
+      document.getElementById("winner-page").style.display = "block";
+      document.getElementById("winner-name").innerHTML = winner.name;
     }
   }
 
